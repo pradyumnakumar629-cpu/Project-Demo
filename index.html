@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cricket Scorer - a live scoreboard for T10 and T20 matches, built with HTML, CSS and JavaScript." />
+  <title>Cricket Scorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="top">
+    <h1>🏏 Cricket<span>Scorer</span></h1>
+    <p>Live scoreboard for T10 / T20 matches</p>
+  </header>
+
+  <main>
+
+    <!-- MATCH SETUP -->
+    <section id="setup" class="card">
+      <h2>New Match</h2>
+      <form id="setup-form" class="form">
+        <label>Team 1
+          <input type="text" id="teamA" placeholder="e.g. Royal Warriors" maxlength="24" />
+        </label>
+        <label>Team 2
+          <input type="text" id="teamB" placeholder="e.g. Super Kings" maxlength="24" />
+        </label>
+        <div class="row">
+          <label>Overs
+            <input type="number" id="overs" value="10" min="1" max="50" />
+          </label>
+          <label>Wickets
+            <input type="number" id="wickets" value="10" min="1" max="11" />
+          </label>
+        </div>
+        <label>Batting first (toss winner)
+          <select id="batFirst"></select>
+        </label>
+        <button type="submit" class="btn primary">Start Match</button>
+      </form>
+    </section>
+
+    <!-- LIVE MATCH -->
+    <section id="match" class="hidden">
+
+      <div class="card scoreboard">
+        <div class="inn-tag" id="innTag">1st Innings</div>
+        <h2 id="batTeam">Team</h2>
+        <div class="score"><span id="runs">0</span><small>/</small><span id="wkts">0</span></div>
+        <div class="overs">Overs <b id="oversDone">0.0</b> / <span id="maxOvers">10</span></div>
+        <div class="stats">
+          <div>Run Rate <b id="crr">0.00</b></div>
+          <div id="targetBox" class="hidden"></div>
+        </div>
+        <div class="strip-label">This over</div>
+        <div class="over-strip" id="overStrip"></div>
+      </div>
+
+      <div id="banner" class="banner hidden"></div>
+      <button id="startSecond" class="btn primary wide hidden">Start 2nd Innings ▶</button>
+
+      <div class="card pad">
+        <div class="pad-grid" id="runPad">
+          <button data-run="0">0</button>
+          <button data-run="1">1</button>
+          <button data-run="2">2</button>
+          <button data-run="3">3</button>
+          <button data-run="4" class="four">4</button>
+          <button data-run="6" class="six">6</button>
+        </div>
+        <div class="pad-grid three">
+          <button id="wideBtn" class="extra">Wide</button>
+          <button id="nbBtn" class="extra">No Ball</button>
+          <button id="wicketBtn" class="out">Wicket</button>
+        </div>
+        <div class="actions">
+          <button id="undoBtn" class="ghost">↶ Undo</button>
+          <button id="copyBtn" class="ghost">Copy Scorecard</button>
+          <button id="newBtn" class="ghost danger">New Match</button>
+        </div>
+        <p class="hint">Keyboard: 0-4, 6 runs · E wide · N no ball · W wicket · U undo</p>
+      </div>
+
+      <div class="card">
+        <h3>Scorecard</h3>
+        <table class="summary">
+          <thead><tr><th>Team</th><th>Score</th><th>Overs</th><th>Extras</th><th>RR</th></tr></thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <footer>Built with HTML, CSS &amp; JavaScript · Your match is saved in this browser</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
